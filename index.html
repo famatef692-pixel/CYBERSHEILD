@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberShield: Securing the Future</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0B1320;
+            color: #F8FAFC;
+        }
+        body.arabic-mode {
+            font-family: 'Cairo', sans-serif;
+        }
+        .bg-emerald-brand { background-color: #09806E; }
+        .text-emerald-brand { color: #09806E; }
+        .border-emerald-brand { border-color: #09806E; }
+        .bg-coral-brand { background-color: #C94070; }
+        .text-coral-brand { color: #C94070; }
+        .border-coral-brand { border-color: #C94070; }
+        .gradient-glow {
+            background: radial-gradient(circle at 50% 0%, rgba(9, 128, 110, 0.25) 0%, rgba(11, 19, 32, 0) 70%);
+        }
+    </style>
+</head>
+<body class="bg-[#0B1320] text-slate-100 antialiased selection:bg-[#09806E] selection:text-white">
+
+    <!-- Navbar -->
+    <header class="sticky top-0 z-50 backdrop-blur-xl bg-[#0B1320]/80 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#09806E] to-[#C94070] flex items-center justify-center shadow-lg shadow-[#09806E]/20">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                </div>
+                <div>
+                    <span class="text-xl font-black tracking-wider text-white">CYBER<span class="text-[#09806E]">SHIELD</span></span>
+                    <span class="block text-[10px] text-slate-400 tracking-widest uppercase font-semibold" data-en="Security Platform" data-ar="منصة أمنية">Security Platform</span>
+                </div>
+            </div>
+
+            <!-- Nav Links -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+                <a href="#offers" class="hover:text-[#09806E] transition-colors" data-en="Offers" data-ar="العروض">Offers</a>
+                <a href="#problem" class="hover:text-[#09806E] transition-colors" data-en="Problem" data-ar="المشكلة">Problem</a>
+                <a href="#solution" class="hover:text-[#09806E] transition-colors" data-en="Solution" data-ar="الحل">Solution</a>
+                <a href="#plans" class="hover:text-[#09806E] transition-colors" data-en="Plans" data-ar="الخطط">Plans</a>
+                <a href="#metrics" class="hover:text-[#09806E] transition-colors" data-en="Business Metrics" data-ar="أداء الأعمال">Business Metrics</a>
+            </nav>
+
+            <!-- Actions -->
+            <div class="flex items-center gap-4">
+                <button id="langToggle" onclick="toggleLanguage()" class="px-3.5 py-1.5 rounded-lg border border-slate-700 hover:border-[#09806E] text-xs font-bold tracking-wider transition-all bg-slate-900/50 text-slate-200">
+                    عربي / EN
+                </button>
+                <a href="#plans" class="hidden sm:inline-flex px-5 py-2.5 rounded-xl bg-[#09806E] hover:bg-[#076a5c] text-white text-xs font-bold uppercase tracking-wider shadow-lg shadow-[#09806E]/30 transition-all">
+                    <span data-en="Get Protected" data-ar="احمِ عملك">Get Protected</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-20 pb-32 overflow-hidden gradient-glow">
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-8">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#09806E]/10 border border-[#09806E]/30 text-[#09806E] text-xs font-bold tracking-wide">
+                    <span class="w-2 h-2 rounded-full bg-[#09806E] animate-pulse"></span>
+                    <span data-en="Next-Gen Digital Infrastructure Protection" data-ar="حماية البنية التحتية الرقمية من الجيل القادم">Next-Gen Digital Infrastructure Protection</span>
+                </div>
+                <h1 class="text-4xl sm:text-6xl font-black tracking-tight text-white leading-tight">
+                    <span data-en="Securing the Future for a Connected World" data-ar="تأمين المستقبل لعالم متصل">Securing the Future for a Connected World</span>
+                </h1>
+                <p class="text-
