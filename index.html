@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CyberShield - Securing the Future | Enterprise Cyber Security</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              teal: '#09806E',
+              tealDark: '#06594d',
+              tealLight: '#14b8a6',
+              coral: '#C94070',
+              gold: '#F59E0B',
+              navy: '#0B1320',
+              card: '#131f33',
+              border: '#1e2d42'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'Cairo', 'sans-serif'],
+            arabic: ['Cairo', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Inter', 'Cairo', sans-serif;
+      background-color: #0B1320;
+      color: #F3F4F6;
+      overflow-x: hidden;
+    }
+    .grid-bg {
+      background-size: 40px 40px;
+      background-image: 
+        linear-gradient(to right, rgba(15, 23, 42, 0.6) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(15, 23, 42, 0.6) 1px, transparent 1px);
+    }
+    .glow-teal {
+      box-shadow: 0 0 35px -5px rgba(9, 128, 110, 0.35);
+    }
+    .glow-coral {
+      box-shadow: 0 0 35px -5px rgba(201, 64, 112, 0.35);
+    }
+    .glass-card {
+      background: rgba(19, 31, 51, 0.75);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-card-hover {
+      transition: all 0.3s ease;
+    }
+    .glass-card-hover:hover {
+      border-color: rgba(20, 184, 166, 0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px -10px rgba(9, 128, 110, 0.3);
+    }
+    html[dir="rtl"] {
+      font-family: 'Cairo', 'Inter', sans-serif;
+    }
+    .gradient-text-teal {
+      background: linear-gradient(135deg, #14b8a6 0%, #09806E 50%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gradient-text-gold {
+      background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 50%, #C94070 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-brand-teal selection:text-white">
+
+  <div class="fixed inset-0 grid-bg opacity-30 pointer-events-none z-0"></div>
+  <div class="fixed top-0 left-1/4 w-[500px] h-[500px] bg-brand-teal/15 rounded-full blur-[140px] pointer-events-none z-0"></div>
+  <div class="fixed bottom-1/3 right-10 w-[400px] h-[400px] bg-brand-coral/10 rounded-full blur-[130px] pointer-events-none z-0"></div>
+
+  <div class="relative z-10 flex flex-col min-h-screen">
+
+    <header class="sticky top-0 z-50 glass-card border-b border-brand-border/80 backdrop-blur-md">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        <a href="#" class="flex items-center gap-3 group">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-teal to-brand-tealLight flex items-center justify-center shadow-lg shadow-brand-teal/30 group-hover:scale-105 transition-transform">
+            <i data-lucide="shield-check" class="w-6 h-6 text-white"></i>
+          </div>
+          <div class="flex flex-col">
+            <span class="text-xl font-extrabold tracking-tight text-white flex items-center gap-1.5">
+              CyberShield <span class="w-2 h-2 rounded-full bg-brand-tealLight animate-pulse"></span>
+            </span>
+            <span class="text-[10px] text-gray-400 font-medium tracking-wider uppercase" data-i18n="tagline_mini">Securing the Future</span>
+          </div>
+        </a>
+
+        <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-gray-300">
+          <a href="#offers" class="hover:text-brand-tealLight transition-colors" data-i18n="nav_offers">Offers & Solutions</a>
+          <a href="#plans" class="hover:text-brand-tealLight transition-colors" data-i18n="nav_plans">Plans & Pricing</a>
+          <a href="#business" class="hover:text-brand-tealLight transition-colors" data-i18n="nav_business">Business Style</a>
+          <a href="#investors" class="hover:text-brand-tealLight transition-colors" data-i18n="nav_investors">Investor ROI</a>
+          <a href="#team" class="hover:text-brand-tealLight transition-colors" data-i18n="nav_team">Leadership</a>
+        </nav>
+
+        <div class="flex items-center gap-4">
+          <button id="langToggleBtn" onclick="toggleLanguage()" class="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-brand-border bg-brand-card/80 hover:bg-brand-border text-xs font-semibold text-gray-300 transition-all">
+            <i data-lucide="globe" class="w-4 h-4 text-brand-tealLight"></i>
+            <span id="langLabel">العربية</span>
+          </button>
+
+          <button onclick="openModal()" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-brand-teal to-brand-tealLight text-white text-sm font-semibold shadow-md shadow-brand-teal/20 hover:brightness-110 active:scale-95 transition-all">
+            <span data-i18n="btn_get_started">Get Started</span>
+            <i data-lucide="arrow-right" class="w-4 h-4 text-white/90 rtl:rotate-180"></i>
+          </button>
+
+          <button id="mobileMenuBtn" onclick="toggleMobileNav()" class="md:hidden p-2 rounded-lg border border-brand-border bg-brand-card text-gray-300">
+            <i data-lucide="menu" class="w-6 h-6"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="mobileMenu" class="hidden md:hidden border-b border-brand-border bg-brand-navy/95 px-4 pt-3 pb-6 space-y-3">
+        <a href="#offers" onclick="toggleMobileNav()" class="block py-2 text-gray-300 hover:text-brand-tealLight font-medium" data-i18n="nav_offers">Offers & Solutions</a>
+        <a href="#plans" onclick="toggleMobileNav()" class="block py-2 text-gray-300 hover:text-brand-tealLight font-medium" data-i18n="nav_plans">Plans & Pricing</a>
+        <a href="#business" onclick="toggleMobileNav()" class="block py-2 text-gray-300 hover:text-brand-tealLight font-medium" data-i18n="nav_business">Business Style</a>
+        <a href="#investors" onclick="toggleMobileNav()" class="block py-2 text-gray-300 hover:text-brand-tealLight font-medium" data-i18n="nav_investors">Investor ROI</a>
+        <a href="#team" onclick="toggleMobileNav()" class="block py-2 text-gray-300 hover:text-brand-tealLight font-medium" data-i18n="nav_team">Leadership</a>
+        <button onclick="toggleMobileNav(); openModal();" class="w-full mt-2 py-3 rounded-xl bg-brand-teal text-white font-semibold flex items-center justify-center gap-2">
+          <span data-i18n="btn_get_started">Get Started</span>
+          <i data-lucide="arrow-right" class="w-4 h-4 rtl:rotate-180"></i>
+        </button>
+      </div>
+    </header>
+
+    <section class="relative pt-12 pb-20 md:pt-20 md:pb-32 overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-teal/40 bg-brand-teal/10 text-brand-tealLight text-xs font-semibold uppercase tracking-wider mb-8 shadow-inner">
+          <i data-lucide="shield-alert" class="w-4 h-4 text-brand-tealLight"></i>
+          <span data-i18n="hero_pill">Next-Gen Cybersecurity Platform</span>
+        </div>
+
+        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-tight max-w-5xl mx-auto mb-6">
+          <span data-i18n="hero_title_1">CyberShield:</span> 
+          <span class="gradient-text-teal" data-i18n="hero_title_2">Securing the Future</span>
+        </h1>
+
+        <p class="text-lg sm:text-2xl text-gray-300 max-w-3xl mx-auto font-light mb-10 leading-relaxed" data-i18n="hero_subtitle">
+          Simple, strong security for a connected world. Protecting businesses, governments, and individuals from evolving cyber threats with AI precision.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+          <button onclick="openModal('Request Demo')" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-brand-teal via-brand-tealLight to-teal-500 text-white font-bold text-base shadow-lg shadow-brand-teal/30 hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-2">
+            <i data-lucide="lock" class="w-5 h-5"></i>
+            <span data-i18n="hero_cta_primary">Protect Your System Now</span>
+          </button>
+          <a href="#plans" class="w-full sm:w-auto px-8 py-4 rounded-xl border border-brand-border bg-brand-card/90 text-gray-200 font-semibold text-base hover:bg-brand-border hover:text-white transition-all flex items-center justify-center gap-2">
+            <span data-i18n="hero_cta_secondary">Explore Plans & Offers</span>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400"></i>
+          </a>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 max-w-5xl mx-auto">
+          <div class="glass-card p-6 rounded-2xl text-center border-t-2 border-t-brand-tealLight">
+            <div class="text-3xl sm:text-4xl font-extrabold text-white mb-1">$2.1M</div>
+            <div class="text-xs sm:text-sm text-gray-400 uppercase tracking-wider font-medium" data-i18n="stat_arr">Annual Recurring Revenue</div>
+            <span class="inline-block mt-2 text-[11px] font-semibold text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded-md border border-emerald-800/50">+22% MoM Growth</span>
+          </div>
+
+          <div class="glass-card p-6 rounded-2xl text-center border-t-2 border-t-brand-teal">
+            <div class="text-3xl sm:text-4xl font-extrabold text-white mb-1">340+</div>
+            <div class="text-xs sm:text-sm text-gray-400 uppercase tracking-wider font-medium" data-i18n="stat_customers">Paying Customers</div>
+            <span class="inline-block mt-2 text-[11px] text-gray-400" data-i18n="stat_industries">Across 12 Industries</span>
+          </div>
+
+          <div class="glass-card p-6 rounded-2xl text-center border-t-2 border-t-brand-tealLight">
+            <div class="text-3xl sm:text-4xl font-extrabold text-white mb-1">94%</div>
+            <div class="text-xs sm:text-sm text-gray-400 uppercase tracking-wider font-medium" data-i18n="stat_retention">Retention Rate</div>
+            <span class="inline-block mt-2 text-[11px] text-brand-tealLight" data-i18n="stat_vs_industry">vs. 85% SaaS Avg</span>
+          </div>
+
+          <div class="glass-card p-6 rounded-2xl text-center border-t-2 border-t-brand-coral">
+            <div class="text-3xl sm:text-4xl font-extrabold text-white mb-1">24/7</div>
+            <div class="text-xs sm:text-sm text-gray-400 uppercase tracking-wider font-medium" data-i18n="stat_protection">Always-On Protection</div>
+            <span class="inline-block mt-2 text-[11px] text-brand-coral" data-i18n="stat_ai_response">Automated AI Defense</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 bg-brand-navy/60 border-y border-brand-border/60">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-widest text-brand-coral mb-2 block" data-i18n="prob_tag">The Urgent Challenge</span>
+            <h2 class="text-3xl sm:text-4xl font-bold text-white mb-6 leading-tight" data-i18n="prob_title">
+              Cybercrime is growing rapidly & costs businesses millions.
+            </h2>
+            <p class="text-gray-300 text-base leading-relaxed mb-6" data-i18n="prob_desc">
+              Threat actors are scaling attacks across phishing, ransomware, and data theft. No organization is too small or too established to be targeted. Strong protection is now a business necessity, not an option.
+            </p>
+            <div class="grid grid-cols-2 gap-4 pt-2">
+              <div class="p-4 rounded-xl border border-brand-border bg-brand-card/50">
+                <div class="text-2xl font-bold text-brand-coral mb-1">$4.45M</div>
+                <div class="text-xs text-gray-400" data-i18n="prob_stat_1">Average Data Breach Cost</div>
+              </div>
+              <div class="p-4 rounded-xl border border-brand-border bg-brand-card/50">
+                <div class="text-2xl font-bold text-brand-gold mb-1">+30%</div>
+                <div class="text-xs text-gray-400" data-i18n="prob_stat_2">YoY Growth in Cyber Attacks</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass-card p-8 rounded-3xl border border-brand-border/80 relative">
+            <div class="absolute -top-3 -right-3 px-3 py-1 bg-brand-coral text-white text-[10px] font-extrabold uppercase rounded-full shadow-md">Threat Radar</div>
+            <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+              <i data-lucide="alert-triangle" class="w-5 h-5 text-brand-coral"></i>
+              <span data-i18n="radar_title">3 Critical Risk Vectors Today</span>
+            </h3>
+            <ul class="space-y-4">
+              <li class="flex items-start gap-3 p-3 rounded-xl bg-brand-navy/80 border border-brand-border">
+                <div class="p-2 rounded-lg bg-brand-coral/20 text-brand-coral shrink-0 mt-0.5"><i data-lucide="zap" class="w-4 h-4"></i></div>
+                <div>
+                  <h4 class="text-sm font-bold text-white" data-i18n="risk_1_title">AI-Driven Phishing & Malware</h4>
+                  <p class="text-xs text-gray-400" data-i18n="risk_1_desc">Attacks outpace traditional signature tools, making native AI defenders mandatory.</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-3 p-3 rounded-xl bg-brand-navy/80 border border-brand-border">
+                <div class="p-2 rounded-lg bg-brand-gold/20 text-brand-gold shrink-0 mt-0.5"><i data-lucide="users" class="w-4 h-4"></i></div>
+                <div>
+                  <h4 class="text-sm font-bold text-white" data-i18n="risk_2_title">Remote Work Surface Expansion</h4>
+                  <p class="text-xs text-gray-400" data-i18n="risk_2_desc">Distributed workforce requires cloud-first security without localized hardware setup.</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-3 p-3 rounded-xl bg-brand-navy/80 border border-brand-border">
+                <div class="p-2 rounded-lg bg-brand-teal/20 text-brand-tealLight shrink-0 mt-0.5"><i data-lucide="file-check" class="w-4 h-4"></i></div>
+                <div>
+                  <h4 class="text-sm font-bold text-white" data-i18n="risk_3_title">Strict Regulatory Mandates</h4>
+                  <p class="text-xs text-gray-400" data-i18n="risk_3_desc">Compliance gaps lead to steep fines and operational halts for uncertified businesses.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="offers" class="py-24 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="text-xs font-bold uppercase tracking-widest text-brand-tealLight mb-2 block" data-i18n="offers_subtitle">CyberShield Core Offers</span>
+          <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight" data-i18n="offers_title">
+            Complete Cyber Protection in One Platform
+          </h2>
+          <p class="text-gray-400 text-base sm:text-lg mt-4" data-i18n="offers_desc">
+            CyberShield combines AI detection, automated compliance, cloud convenience, and security awareness training into a unified defense engine.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="glass-card glass-card-hover p-8 rounded-3xl flex flex-col justify-between border border-brand-border relative overflow-hidden group">
+            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-teal to-teal-700 flex items-center justify-center text-white mb-6 shadow-lg shadow-brand-teal/30 group-hover:scale-110 transition-transform">
+              <i data-lucide="cpu" class="w-7 h-7"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-white mb-3" data-i18n="offer_1_title">AI Threat Detection</h3>
+              <p class="text-sm text-gray-300 leading-relaxed" data-i18n="offer_1_desc">
+                Monitors suspicious activity in real time using AI algorithms. Detects and stops threats before they escalate into major incidents.
+              </p>
+            </div>
+            <ul class="mt-6 pt-6 border-t border-brand-border/60 space-y-2 text-xs text-gray-400">
+              <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-brand-tealLight"></i> <span data-i18n="offer_1_f1">Real-time AI telemetry</span></li>
+              <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-brand-tealLight"></i> <span data-i18n="offer_1_f2">Zero-day malware isolation</span></li>
+            </ul>
+          </div>
+
+          <div class="glass-card glass-card-hover p-8 rounded-3xl flex flex-col justify-between border border-brand-border relative overflow-hidden group">
+            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-600 to-brand-teal flex items-center justify-center text-white mb-6 shadow-lg shadow-cyan-600/30 group-hover:scale-110 transition-transform">
+              <i data-lucide="cloud-lightning" class="w-7 h-7"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-white mb-3" data-i18n="offer_2_title">Cloud Security Platform</h3>
+              <p class="text-sm text-gray-300 leading-relaxed" data-i18n="offer_2_desc">
+                Runs 100% in the cloud and deploys instantly. No expensive on-premise hardware or lengthy setup timelines required.
+              </p>
+            </div>
+            <ul class="mt-6 pt-6 border-t border-brand-border/60 space-y-2 text-xs text-gray-400">
+              <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-brand-tealLight"></i> <span data-i18n="offer_2_f1">Instant 1-click integration</span></li>
+              <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-brand-tealLight"></i> <span data-i18n="offer_2_f2">Zero infrastructure cost</span></li>
+            </ul>
+          </div>
+
+          <div class="glass-card glass-card-hover p-8 rounded-3xl flex flex-col justify-between border border-brand-border relative overflow-hidden group">
+            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-600 to-brand-teal flex items-center justify-center text-white mb-6 shadow-lg shadow-indigo-600/30 group-hover:scale-110 transition-transform">
+              <i data-lucide="shield-check" class="w-7 h-7"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-white mb-3" data-i18n="offer_3_title">Automated Compliance</h3>
+              <p class="text-sm text-gray-300 leading-relaxed" data-i18n="offer_3_desc">
+                Makes your organization audit-ready with built-in support for global compliance standards, automated reporting, and gap analysis.
+              </p>
+            </div>
+            <ul class="mt-6 pt-6 border-t border-brand-border/60 space-y-2 text-xs text-gray-400">
+              <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-brand-tealLight"></i> <span data-i18n="offer_3_f1">Automated compliance audit</span></li>
+              <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-brand-tealLight"></i> <span data-i18n="offer_3_f2">Instant PDF report export</span></li>
+            </ul>
+          </div>
+
+          <div class="glass-card glass-card-hover p-8 rounded-3xl flex flex-col justify-between border border-brand-border relative overflow-hidden group">
+            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-coral to-rose-700 flex items-center justify-center text-white mb-6 shadow-lg shadow-brand-coral/30 group-hover:scale-110 transition-transform">
+              <i data-lucide="user-check" class="w-7 h-7"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-white mb-3" data-i18n="offer_4_title">Security Awareness Training</h3>
+              <p class="text-sm text-gray-300 leading-relaxed" data-i18n="offer_4_desc">
+                Trains team members to identify and avoid cyber threats, reducing human error and strengthening your human defense perimeter.
+              </p>
+            </div>
+            <ul class="mt-6 pt-6 border-t border-brand-border/60 space-y-2 text-xs text-gray-400">
+              <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-brand-tealLight"></i> <span data-i18n="offer_4_f1">Interactive phishing simulations</span></li>
+              <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-4 h-4 text-brand-tealLight"></i> <span data-i18n="offer_4_f2">Employee risk scoring</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="plans" class="py-24 bg-brand-navy/80 border-t border-brand-border/80 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <span class="text-xs font-bold uppercase tracking-widest text-brand-tealLight mb-2 block" data-i18n="plans_subtitle">Flexible Security Plans</span>
+          <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight" data-i18n="plans_title">
+            Tailored Protection for Every Business Size
+          </h2>
+          <p class="text-gray-400 text-base sm:text-lg mt-4" data-i18n="plans_desc">
+            Start small, prove immediate value, and scale your protection seamlessly as your company grows.
+          </p>
+
+          <div class="flex items-center justify-center gap-4 mt-8">
+            <span id="monthlyLabel" class="text-sm font-semibold text-white">Monthly</span>
+            <button id="pricingToggle" onclick="toggleBilling()" class="w-14 h-8 rounded-full bg-brand-card border border-brand-tealLight p-1 relative transition-colors focus:outline-none">
+              <div id="pricingDot" class="w-6 h-6 rounded-full bg-brand-tealLight transition-transform"></div>
+            </button>
+            <span id="annualLabel" class="text-sm font-semibold text-gray-400 flex items-center gap-1.5">
+              Annual 
+              <span class="text-[10px] bg-brand-coral/20 text-brand-coral border border-brand-coral/40 px-2 py-0.5 rounded-full font-bold uppercase" data-i18n="save_badge">Save 20%</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+          <div class="glass-card p-8 rounded-3xl border border-brand-border flex flex-col justify-between hover:border-gray-600 transition-all">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-xl font-bold text-white" data-i18n="plan_basic_name">Basic Plan</h3>
+                <span class="text-xs px-3 py-1 rounded-full bg-gray-800 text-gray-300 font-medium" data-i18n="plan_basic_target">Freelancers & Small Teams</span>
+              </div>
+              <p class="text-xs text-gray-400 mb-6" data-i18n="plan_basic_desc">Essential baseline threat protection for small setups up to 10 users.</p>
+              <div class="mb-8">
+                <span class="text-4xl font-extrabold text-white" id="basicPrice">$99</span>
+                <span class="text-gray-400 text-sm font-medium" id="basicPeriod">/ month</span>
+              </div>
+              <ul class="space-y-3 text-sm text-gray-300 mb-8">
+                <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-tealLight shrink-0"></i> <span data-i18n="basic_f1">Up to 10 Protected Users</span></li>
+                <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-tealLight shrink-0"></i> <span data-i18n="basic_f2">Basic Threat Detection Engine</span></li>
+                <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-tealLight shrink-0"></i> <span data-i18n="basic_f3">Baseline Firewall Protection</span></li>
+                <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-tealLight shrink-0"></i> <span data-i18n="basic_f4">Monthly Security Digest Reports</span></li>
+                <li class="flex items-center gap-3 text-gray-500 line-through"><i data-lucide="x" class="w-4 h-4 text-gray-600 shrink-0"></i> <span data-i18n="basic_f5">AI Real-Time Response</span></li>
+              </ul>
+            </div>
+            <button onclick="openModal('Basic Plan Subscription')" class="w-full py-3.5 rounded-xl border border-brand-teal/60 text-brand-tealLight font-bold text-sm hover:bg-brand-teal hover:text-white transition-all">
+              <span data-i18n="btn_choose_basic">Get Started - Basic</span>
+            </button>
+          </div>
+
+          <div class="glass-card p-8 rounded-3xl border-2 border-brand-tealLight relative flex flex-col justify-between glow-teal scale-105 z-10 bg-brand-card/90">
+            <div class="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-brand-teal to-brand-tealLight text-white text-xs font-extrabold uppercase rounded-full shadow-md tracking-wider" data-i18n="most_popular">
+              Most Popular Choice
+            </div>
+            <div>
+              <div class="flex items-center justify-between mb-4 mt-2">
+                <h3 class="text-2xl font-bold text-white" data-i18n="plan_biz_name">Business Plan</h3>
+                <span class="text-xs px-3 py-1 rounded-full bg-brand-teal/20 text-brand-tealLight font-semibold" data-i18n="plan_biz_target">Growing SMBs</span>
+              </div>
+              <p class="text-xs text-gray-300 mb-6" data-i18n="plan_biz_desc">Full AI detection, compliance automation & training for up to 100 users.</p>
+              <div class="mb-8">
+                <span class="text-5xl font-extrabold text-white" id="bizPrice">$499</span>
+                <span class="text-gray-400 text-sm font-medium" id="bizPeriod">/ month</span>
+              </div>
+              <ul class="space-y-3.5 text-sm text-gray-200 mb-8">
+                <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-brand-tealLight shrink-0"></i> <span data-i18n="biz_f1">Up to 100 Protected Users</span></li>
+                <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-brand-tealLight shrink-0"></i> <span data-i18n="biz_f2">Real-Time AI Threat Detection</span></li>
+                <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-brand-tealLight shrink-0"></i> <span data-i18n="biz_f3">Automated Compliance & Audit Tools</span></li>
+                <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-brand-tealLight shrink-0"></i> <span data-i18n="biz_f4">Security Awareness & Phishing Training</span></li>
+                <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-brand-tealLight shrink-0"></i> <span data-i18n="biz_f5">Real-Time Automated Incident Response</span></li>
+                <li class="flex items-center gap-3"><i data-lucide="check" class="w-5 h-5 text-brand-tealLight shrink-0"></i> <span data-i18n="biz_f6">Priority 24/7 Support</span></li>
+              </ul>
+            </div>
+            <button onclick="openModal('Business Plan Subscription')" class="w-full py-4 rounded-xl bg-gradient-to-r from-brand-teal to-brand-tealLight text-white font-extrabold text-sm shadow-lg shadow-brand-teal/40 hover:brightness-110 active:scale-95 transition-all">
+              <span data-i18n="btn_choose_biz">Start Business Trial</span>
+            </button>
+          </div>
+
+          <div class="glass-card p-8 rounded-3xl border border-brand-border flex flex-col justify-between hover:border-gray-600 transition-all">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-xl font-bold text-white" data-i18n="plan_ent_name">Enterprise Plan</h3>
+                <span class="text-xs px-3 py-1 rounded-full bg-brand-coral/20 text-brand-coral font-medium" data-i18n="plan_ent_target">Large Organizations</span>
+              </div>
+              <p class="text-xs text-gray-400 mb-6" data-i18n="plan_ent_desc">Custom architecture, unlimited scaling, API integrations, and dedicated SLA.</p>
+              <div class="mb-8">
+                <span class="text-4xl font-extrabold text-white" data-i18n="plan_ent_price">Custom</span>
+                <span class="text-gray-400 text-sm font-medium" data-i18n="plan_ent_period">/ tailored quote</span>
+              </div>
+              <ul class="space-y-3 text-sm text-gray-300 mb-8">
+                <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-tealLight shrink-0"></i> <span data-i18n="ent_f1">Unlimited Users & Endpoints</span></li>
+                <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-tealLight shrink-0"></i> <span data-i18n="ent_f2">Custom On-Prem Hybrid Deployment</span></li>
+                <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-tealLight shrink-0"></i> <span data-i18n="ent_f3">Dedicated Security Account Engineer</span></li>
+                <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-tealLight shrink-0"></i> <span data-i18n="ent_f4">Custom API & SIEM Integrations</span></li>
+                <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-tealLight shrink-0"></i> <span data-i18n="ent_f5">Guaranteed SLA & Incident Response</span></li>
+              </ul>
+            </div>
+            <button onclick="openModal('Enterprise Inquiry')" class="w-full py-3.5 rounded-xl border border-brand-border bg-brand-card/80 text-white font-bold text-sm hover:bg-brand-border transition-all">
+              <span data-i18n="btn_choose_ent">Contact Enterprise Team</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="mt-16 glass-card p-6 sm:p-8 rounded-3xl border border-brand-border/80 max-w-4xl mx-auto">
+          <h4 class="text-lg font-bold text-white mb-2 text-center" data-i18n="calc_title">Estimate Your Monthly Security Cost</h4>
+          <p class="text-xs text-gray-400 text-center mb-6" data-i18n="calc_desc">Adjust employee count to see recommended plan and estimated monthly investment.</p>
+          <div class="flex flex-col sm:flex-row items-center gap-6">
+            <div class="w-full sm:w-2/3">
+              <div class="flex justify-between text-sm font-semibold text-gray-300 mb-2">
+                <span data-i18n="calc_users_label">Number of Employees:</span>
+                <span id="userCountDisplay" class="text-brand-tealLight font-bold text-base">25 Users</span>
+              </div>
+              <input id="userSlider" type="range" min="1" max="250" value="25" oninput="updateCostCalculator()" class="w-full h-2 bg-brand-navy rounded-lg appearance-none cursor-pointer accent-brand-tealLight">
+              <div class="flex justify-between text-[10px] text-gray-500 mt-1">
+                <span>1 User</span>
+                <span>10 Users</span>
+                <span>100 Users</span>
+                <span>250+ Users</span>
+              </div>
+            </div>
+            <div class="w-full sm:w-1/3 bg-brand-navy p-4 rounded-2xl border border-brand-border text-center">
+              <div class="text-xs text-gray-400 uppercase tracking-wider mb-1" data-i18n="calc_rec">Recommended Tier</div>
+              <div id="calcPlanName" class="text-lg font-bold text-white">Business Plan</div>
+              <div id="calcPlanPrice" class="text-2xl font-extrabold text-brand-tealLight mt-1">$499 / mo</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="business" class="py-24 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-widest text-brand-gold mb-2 block" data-i18n="biz_style_tag">Business Style & Unit Economics</span>
+            <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight" data-i18n="biz_style_title">
+              Proven SaaS Growth Engine with Strong Retention
+            </h2>
+            <p class="text-gray-300 text-base mt-4 leading-relaxed" data-i18n="biz_style_desc">
+              CyberShield operates on a highly profitable SaaS model with recurring revenue, clear upgrade paths, and net revenue retention of 127%. Customers start small and expand usage within 90 days.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div class="glass-card p-5 rounded-2xl border border-brand-border">
+              <div class="text-xs text-gray-400 font-medium mb-1" data-i18n="m_arr">Annual Recurring Revenue</div>
+              <div class="text-3xl font-extrabold text-white">$2.1M</div>
+              <div class="text-[11px] text-emerald-400 mt-1" data-i18n="m_arr_sub">First 18 months, +22% MoM</div>
+            </div>
+
+            <div class="glass-card p-5 rounded-2xl border border-brand-border">
+              <div class="text-xs text-gray-400 font-medium mb-1" data-i18n="m_nrr">Net Revenue Retention</div>
+              <div class="text-3xl font-extrabold text-white">127%</div>
+              <div class="text-[11px] text-brand-tealLight mt-1" data-i18n="m_nrr_sub">340+ active customers</div>
+            </div>
+
+            <div class="glass-card p-5 rounded-2xl border border-brand-border">
+              <div class="text-xs text-gray-400 font-medium mb-1" data-i18n="m_payback">CAC Payback Period</div>
+              <div class="text-3xl font-extrabold text-white">8 Months</div>
+              <div class="text-[11px] text-gray-300 mt-1" data-i18n="m_payback_sub">6.2:1 LTV-to-CAC Ratio</div>
+            </div>
+
+            <div class="glass-card p-5 rounded-2xl border border-brand-border">
+              <div class="text-xs text-gray-400 font-medium mb-1" data-i18n="m_retention">Annual Retention</div>
+              <div class="text-3xl font-extrabold text-white">94%</div>
+              <div class="text-[11px] text-brand-gold mt-1" data-i18n="m_retention_sub">Above SaaS avg (85%)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card p-6 sm:p-10 rounded-3xl border border-brand-border">
+          <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
+            <div>
+              <h3 class="text-2xl font-bold text-white" data-i18n="chart_title">5-Year Profit Roadmap ($M)</h3>
+              <p class="text-xs text-gray-400" data-i18n="chart_desc">Reaching profitability in Year 2 and projecting $28M annual profit by Year 5.</p>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="inline-flex items-center gap-1.5 text-xs text-brand-tealLight font-semibold">
+                <span class="w-3 h-3 rounded-full bg-brand-tealLight"></span> Net Profit Projections
+              </span>
+            </div>
+          </div>
+
+          <div class="relative h-72 sm:h-96 w-full">
+            <canvas id="profitChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="investors" class="py-24 bg-brand-navy/90 border-t border-brand-border/80 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="text-xs font-bold uppercase tracking-widest text-brand-coral mb-2 block" data-i18n="inv_tag">Investment Opportunity</span>
+          <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight" data-i18n="inv_title">
+            Seed Fundraising & Investor Return Plan
+          </h2>
+          <p class="text-gray-400 text-base sm:text-lg mt-4" data-i18n="inv_subtitle">
+            Capitalizing on a $500B global market opportunity by empowering underserved SMBs across MENA and global regions.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+          <div class="glass-card p-8 rounded-3xl border border-brand-border flex flex-col justify-between">
+            <div>
+              <div class="inline-block px-3 py-1 rounded-full bg-brand-coral/20 text-brand-coral text-xs font-bold uppercase mb-4" data-i18n="ask_pill">Seed Round Ask</div>
+              <h3 class="text-3xl font-extrabold text-white mb-2" data-i18n="ask_amount">$3,000,000 USD</h3>
+              <p class="text-brand-tealLight font-semibold text-sm mb-6" data-i18n="ask_equity">For 15% Equity Stake in CyberShield Inc.</p>
+
+              <div class="space-y-3 pt-4 border-t border-brand-border text-sm">
+                <div class="flex justify-between py-1">
+                  <span class="text-gray-400" data-i18n="valuation_pre">Pre-Money Valuation:</span>
+                  <span class="text-white font-bold">$17,000,000 USD</span>
+                </div>
+                <div class="flex justify-between py-1">
+                  <span class="text-gray-400" data-i18n="valuation_post">Post-Money Valuation:</span>
+                  <span class="text-white font-bold">$20,000,000 USD</span>
+                </div>
+                <div class="flex justify-between py-1">
+                  <span class="text-gray-400" data-i18n="projected_exit">Projected Exit Return:</span>
+                  <span class="text-brand-gold font-bold">25x – 37x ROI ($75M - $112M)</span>
+                </div>
+              </div>
+            </div>
+
+            <button onclick="openModal('Investor Diligence Deck Request')" class="mt-8 w-full py-3.5 rounded-xl bg-brand-coral hover:bg-rose-600 text-white font-bold text-sm shadow-lg shadow-brand-coral/30 transition-all">
+              <span data-i18n="btn_request_deck">Request Full Diligence Model</span>
+            </button>
+          </div>
+
+          <div class="glass-card p-8 rounded-3xl border border-brand-border">
+            <h3 class="text-xl font-bold text-white mb-6" data-i18n="use_funds_title">Use of Funds Allocation</h3>
+            <div class="space-y-4">
+              <div>
+                <div class="flex justify-between text-xs font-semibold text-gray-300 mb-1">
+                  <span data-i18n="fund_1">Product R&D & AI Development</span>
+                  <span class="text-brand-tealLight">35% ($1.05M)</span>
+                </div>
+                <div class="w-full h-2.5 bg-brand-navy rounded-full overflow-hidden">
+                  <div class="h-full bg-brand-tealLight w-[35%]"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs font-semibold text-gray-300 mb-1">
+                  <span data-i18n="fund_2">Sales & Marketing Expansion</span>
+                  <span class="text-brand-teal">30% ($900K)</span>
+                </div>
+                <div class="w-full h-2.5 bg-brand-navy rounded-full overflow-hidden">
+                  <div class="h-full bg-brand-teal w-[30%]"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs font-semibold text-gray-300 mb-1">
+                  <span data-i18n="fund_3">International Expansion (MENA/SEA)</span>
+                  <span class="text-brand-gold">20% ($600K)</span>
+                </div>
+                <div class="w-full h-2.5 bg-brand-navy rounded-full overflow-hidden">
+                  <div class="h-full bg-brand-gold w-[20%]"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs font-semibold text-gray-300 mb-1">
+                  <span data-i18n="fund_4">Operations & Cloud Infrastructure</span>
+                  <span class="text-purple-400">10% ($300K)</span>
+                </div>
+                <div class="w-full h-2.5 bg-brand-navy rounded-full overflow-hidden">
+                  <div class="h-full bg-purple-400 w-[10%]"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs font-semibold text-gray-300 mb-1">
+                  <span data-i18n="fund_5">Legal & Global Compliance</span>
+                  <span class="text-brand-coral">5% ($150K)</span>
+                </div>
+                <div class="w-full h-2.5 bg-brand-navy rounded-full overflow-hidden">
+                  <div class="h-full bg-brand-coral w-[5%]"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="text-2xl font-bold text-white text-center mb-8" data-i18n="timeline_heading">5-Year Investor Return Roadmap</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="glass-card p-6 rounded-2xl border border-brand-border border-t-2 border-t-brand-tealLight">
+            <div class="text-xs font-bold text-brand-tealLight uppercase mb-2">Year 1 (2025)</div>
+            <h4 class="text-base font-bold text-white mb-2" data-i18n="y1_title">$5.5M ARR Target</h4>
+            <p class="text-xs text-gray-400 leading-relaxed mb-4" data-i18n="y1_desc">Scale to 800 customers. Launch in UAE & Saudi Arabia. Projected valuation $35M (75% gain).</p>
+            <div class="text-xs font-bold text-gray-300" data-i18n="y1_val">Stake Value: $5.25M</div>
+          </div>
+
+          <div class="glass-card p-6 rounded-2xl border border-brand-border border-t-2 border-t-brand-teal">
+            <div class="text-xs font-bold text-brand-teal uppercase mb-2">Year 2 (2026)</div>
+            <h4 class="text-base font-bold text-white mb-2" data-i18n="y2_title">$14M ARR Target</h4>
+            <p class="text-xs text-gray-400 leading-relaxed mb-4" data-i18n="y2_desc">Scale to 2,000+ customers. Series A round at $60M valuation. Top-tier telecom partnerships.</p>
+            <div class="text-xs font-bold text-gray-300" data-i18n="y2_val">Stake Value: $9M (+200%)</div>
+          </div>
+
+          <div class="glass-card p-6 rounded-2xl border border-brand-border border-t-2 border-t-brand-gold">
+            <div class="text-xs font-bold text-brand-gold uppercase mb-2">Year 3 (2027)</div>
+            <h4 class="text-base font-bold text-white mb-2" data-i18n="y3_title">$32M ARR Target</h4>
+            <p class="text-xs text-gray-400 leading-relaxed mb-4" data-i18n="y3_desc">Cross 5,000 customers. Series B round at $120M valuation. Partial liquidity option for Seed investors.</p>
+            <div class="text-xs font-bold text-gray-300" data-i18n="y3_val">Stake Value: $18M (+500%)</div>
+          </div>
+
+          <div class="glass-card p-6 rounded-2xl border border-brand-border border-t-2 border-t-brand-coral">
+            <div class="text-xs font-bold text-brand-coral uppercase mb-2">Year 5 (2029)</div>
+            <h4 class="text-base font-bold text-white mb-2" data-i18n="y5_title">$100M+ ARR / Exit Event</h4>
+            <p class="text-xs text-gray-400 leading-relaxed mb-4" data-i18n="y5_desc">Strategic acquisition or IPO at $500M - $750M valuation (15x ARR exit multiple).</p>
+            <div class="text-xs font-bold text-brand-gold" data-i18n="y5_val">Stake Value: $75M - $112.5M (25x-37x)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="team" class="py-20 relative border-t border-brand-border/60">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="glass-card p-8 sm:p-12 rounded-3xl border border-brand-teal/30 relative">
+          <i data-lucide="quote" class="w-12 h-12 text-brand-tealLight/30 mx-auto mb-4"></i>
+          <blockquote class="text-xl sm:text-2xl font-semibold text-white leading-relaxed mb-6" data-i18n="ceo_quote">
+            "The question is not whether your company will be attacked. The question is: will you be ready when it happens? CyberShield ensures the answer is always yes."
+          </blockquote>
+
+          <div class="flex flex-col items-center justify-center">
+            <div class="w-14 h-14 rounded-full bg-gradient-to-tr from-brand-teal to-brand-coral flex items-center justify-center text-white font-bold text-xl mb-2">
+              FA
+            </div>
+            <div class="text-lg font-bold text-white">Fam Atef</div>
+            <div class="text-xs text-brand-tealLight font-medium" data-i18n="ceo_title">Chief Executive Officer, CyberShield</div>
+            <div class="text-[11px] text-gray-400 mt-2" data-i18n="founding_team">Co-Founded by: Fam, Charl, Bemen, Paula, Youssef Mostafa</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="mt-auto bg-brand-navy border-t border-brand-border/80 pt-16 pb-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+          <div class="md:col-span-2">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-8 h-8 rounded-lg bg-brand-teal flex items-center justify-center text-white">
+                <i data-lucide="shield" class="w-5 h-5"></i>
+              </div>
+              <span class="text-xl font-bold text-white">CyberShield</span>
+            </div>
+            <p class="text-xs text-gray-400 max-w-sm mb-6" data-i18n="footer_desc">
+              Empowering global organizations with AI-native cybersecurity, continuous compliance, and cloud threat protection.
+            </p>
+            <div class="flex items-center gap-4 text-xs text-gray-300">
+              <a href="mailto:invest@cybershield.io" class="flex items-center gap-1.5 hover:text-brand-tealLight transition-colors">
+                <i data-lucide="mail" class="w-4 h-4 text-brand-tealLight"></i> invest@cybershield.io
+              </a>
+              <a href="tel:+2001200504550" class="flex items-center gap-1.5 hover:text-brand-tealLight transition-colors">
+                <i data-lucide="phone" class="w-4 h-4 text-brand-tealLight"></i> +20 (012) 005-04550
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <h4 class="text-xs font-bold uppercase tracking-wider text-white mb-4" data-i18n="footer_quick">Quick Links</h4>
+            <ul class="space-y-2 text-xs text-gray-400">
+              <li><a href="#offers" class="hover:text-white transition-colors" data-i18n="nav_offers">Offers & Solutions</a></li>
+              <li><a href="#plans" class="hover:text-white transition-colors" data-i18n="nav_plans">Plans & Pricing</a></li>
+              <li><a href="#business" class="hover:text-white transition-colors" data-i18n="nav_business">Business Model</a></li>
+              <li><a href="#investors" class="hover:text-white transition-colors" data-i18n="nav_investors">Investor Return Plan</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-xs font-bold uppercase tracking-wider text-white mb-4" data-i18n="footer_action">Get In Touch</h4>
+            <button onclick="openModal()" class="w-full py-2.5 rounded-xl bg-brand-teal hover:bg-teal-600 text-white font-semibold text-xs transition-all">
+              <span data-i18n="footer_btn">Book Investor Diligence Session</span>
+            </button>
+            <p class="text-[10px] text-gray-500 mt-3" data-i18n="footer_copy">
+              © 2026 CyberShield Inc. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <div id="contactModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+    <div class="glass-card w-full max-w-lg p-8 rounded-3xl border border-brand-teal/50 relative">
+      <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-brand-teal flex items-center justify-center text-white">
+          <i data-lucide="shield-check" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold text-white" id="modalTitle">Contact CyberShield Team</h3>
+          <p class="text-xs text-gray-400">Request demo or investor diligence deck</p>
+        </div>
+      </div>
+
+      <form onsubmit="handleFormSubmit(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-gray-300 mb-1" data-i18n="form_name">Full Name</label>
+          <input type="text" required placeholder="John Doe" class="w-full px-4 py-2.5 rounded-xl bg-brand-navy border border-brand-border text-white text-sm focus:border-brand-tealLight focus:outline-none">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-gray-300 mb-1" data-i18n="form_email">Email Address</label>
+          <input type="email" required placeholder="name@company.com" class="w-full px-4 py-2.5 rounded-xl bg-brand-navy border border-brand-border text-white text-sm focus:border-brand-tealLight focus:outline-none">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-gray-300 mb-1" data-i18n="form_interest">Interest Area</label>
+          <select id="interestSelect" class="w-full px-4 py-2.5 rounded-xl bg-brand-navy border border-brand-border text-white text-sm focus:border-brand-tealLight focus:outline-none">
+            <option value="Investor Diligence">Investor Diligence & Seed Round</option>
+            <option value="Business Plan Subscription">Business Plan Subscription</option>
+            <option value="Enterprise Custom Protection">Enterprise Protection</option>
+            <option value="General Inquiry">General Security Inquiry</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-gray-300 mb-1" data-i18n="form_msg">Message</label>
+          <textarea rows="3" placeholder="Tell us about your organization..." class="w-full px-4 py-2.5 rounded-xl bg-brand-navy border border-brand-border text-white text-sm focus:border-brand-tealLight focus:outline-none"></textarea>
+        </div>
+
+        <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-brand-teal to-brand-tealLight text-white font-bold text-sm shadow-md transition-all">
+          <span data-i18n="form_submit">Submit Request</span>
+        </button>
+      </form>
+
+      <div class="mt-6 pt-4 border-t border-brand-border flex items-center justify-between text-xs text-gray-400">
+        <button onclick="copyToClipboard('invest@cybershield.io')" class="hover:text-brand-tealLight flex items-center gap-1">
+          <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy Email
+        </button>
+        <a href="tel:+2001200504550" class="hover:text-brand-tealLight flex items-center gap-1">
+          <i data-lucide="phone-call" class="w-3.5 h-3.5"></i> Call Direct
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="fixed bottom-6 right-6 z-50 hidden px-5 py-3 rounded-xl bg-brand-teal text-white text-xs font-bold shadow-xl border border-teal-400 flex items-center gap-2">
+    <i data-lucide="check-circle" class="w-4 h-4"></i>
+    <span id="toastMsg">Action completed successfully</span>
+  </div>
+
+  <script>
+    lucide.createIcons();
+
+    const translations = {
+      en: {
+        tagline_mini: "Securing the Future",
+        nav_offers: "Offers & Solutions",
+        nav_plans: "Plans & Pricing",
+        nav_business: "Business Style",
+        nav_investors: "Investor ROI",
+        nav_team: "Leadership",
+        btn_get_started: "Get Started",
+        hero_pill: "Next-Gen Cybersecurity Platform",
+        hero_title_1: "CyberShield:",
+        hero_title_2: "Securing the Future",
+        hero_subtitle: "Simple, strong security for a connected world. Protecting businesses, governments, and individuals from evolving cyber threats with AI precision.",
+        hero_cta_primary: "Protect Your System Now",
+        hero_cta_secondary: "Explore Plans & Offers",
+        stat_arr: "Annual Recurring Revenue",
+        stat_customers: "Paying Customers",
+        stat_industries: "Across 12 Industries",
+        stat_retention: "Retention Rate",
+        stat_vs_industry: "vs. 85% SaaS Avg",
+        stat_protection: "Always-On Protection",
+        stat_ai_response: "Automated AI Defense",
+        prob_tag: "The Urgent Challenge",
+        prob_title: "Cybercrime is growing rapidly & costs businesses millions.",
+        prob_desc: "Threat actors are scaling attacks across phishing, ransomware, and data theft. No organization is too small or too established to be targeted. Strong protection is now a business necessity, not an option.",
+        prob_stat_1: "Average Data Breach Cost",
+        prob_stat_2: "YoY Growth in Cyber Attacks",
+        radar_title: "3 Critical Risk Vectors Today",
+        risk_1_title: "AI-Driven Phishing & Malware",
+        risk_1_desc: "Attacks outpace traditional signature tools, making native AI defenders mandatory.",
+        risk_2_title: "Remote Work Surface Expansion",
+        risk_2_desc: "Distributed workforce requires cloud-first security without localized hardware setup.",
+        risk_3_title: "Strict Regulatory Mandates",
+        risk_3_desc: "Compliance gaps lead to steep fines and operational halts for uncertified businesses.",
+        offers_subtitle: "CyberShield Core Offers",
+        offers_title: "Complete Cyber Protection in One Platform",
+        offers_desc: "CyberShield combines AI detection, automated compliance, cloud convenience, and security awareness training into a unified defense engine.",
+        offer_1_title: "AI Threat Detection",
+        offer_1_desc: "Monitors suspicious activity in real time using AI algorithms. Detects and stops threats before they escalate into major incidents.",
+        offer_1_f1: "Real-time AI telemetry",
+        offer_1_f2: "Zero-day malware isolation",
+        offer_2_title: "Cloud Security Platform",
+        offer_2_desc: "Runs 100% in the cloud and deploys instantly. No expensive on-premise hardware or lengthy setup timelines required.",
+        offer_2_f1: "Instant 1-click integration",
+        offer_2_f2: "Zero infrastructure cost",
+        offer_3_title: "Automated Compliance",
+        offer_3_desc: "Makes your organization audit-ready with built-in support for global compliance standards, automated reporting, and gap analysis.",
+        offer_3_f1: "Automated compliance audit",
+        offer_3_f2: "Instant PDF report export",
+        offer_4_title: "Security Awareness Training",
+        offer_4_desc: "Trains team members to identify and avoid cyber threats, reducing human error and strengthening your human defense perimeter.",
+        offer_4_f1: "Interactive phishing simulations",
+        offer_4_f2: "Employee risk scoring",
+        plans_subtitle: "Flexible Security Plans",
+        plans_title: "Tailored Protection for Every Business Size",
+        plans_desc: "Start small, prove immediate value, and scale your protection seamlessly as your company grows.",
+        save_badge: "Save 20%",
+        plan_basic_name: "Basic Plan",
+        plan_basic_target: "Freelancers & Micro-Biz",
+        plan_basic_desc: "Essential baseline threat protection for small setups up to 10 users.",
+        btn_choose_basic: "Get Started - Basic",
+        basic_f1: "Up to 10 Protected Users",
+        basic_f2: "Basic Threat Detection Engine",
+        basic_f3: "Baseline Firewall Protection",
+        basic_f4: "Monthly Security Digest Reports",
+        basic_f5: "AI Real-Time Response",
+        most_popular: "Most Popular Choice",
+        plan_biz_name: "Business Plan",
+        plan_biz_target: "Growing SMBs",
+        plan_biz_desc: "Full AI detection, compliance automation & training for up to 100 users.",
+        btn_choose_biz: "Start Business Trial",
+        biz_f1: "Up to 100 Protected Users",
+        biz_f2: "Real-Time AI Threat Detection",
+        biz_f3: "Automated Compliance & Audit Tools",
+        biz_f4: "Security Awareness & Phishing Training",
+        biz_f5: "Real-Time Automated Incident Response",
+        biz_f6: "Priority 24/7 Support",
+        plan_ent_name: "Enterprise Plan",
+        plan_ent_target: "Large Organizations",
+        plan_ent_desc: "Custom architecture, unlimited scaling, API integrations, and dedicated SLA.",
+        plan_ent_price: "Custom",
+        plan_ent_period: "/ tailored quote",
+        btn_choose_ent: "Contact Enterprise Team",
+        ent_f1: "Unlimited Users & Endpoints",
+        ent_f2: "Custom On-Prem Hybrid Deployment",
+        ent_f3: "Dedicated Security Account Engineer",
+        ent_f4: "Custom API & SIEM Integrations",
+        ent_f5: "Guaranteed SLA & Incident Response",
+        calc_title: "Estimate Your Monthly Security Cost",
+        calc_desc: "Adjust employee count to see recommended plan and estimated monthly investment.",
+        calc_users_label: "Number of Employees:",
+        calc_rec: "Recommended Tier",
+        biz_style_tag: "Business Style & Unit Economics",
+        biz_style_title: "Proven SaaS Growth Engine with Strong Retention",
+        biz_style_desc: "CyberShield operates on a highly profitable SaaS model with recurring revenue, clear upgrade paths, and net revenue retention of 127%. Customers start small and expand usage within 90 days.",
+        m_arr: "Annual Recurring Revenue",
+        m_arr_sub: "First 18 months, +22% MoM",
+        m_nrr: "Net Revenue Retention",
+        m_nrr_sub: "340+ active customers",
+        m_payback: "CAC Payback Period",
+        m_payback_sub: "6.2:1 LTV-to-CAC Ratio",
+        m_retention: "Annual Retention",
+        m_retention_sub: "Above SaaS avg (85%)",
+        chart_title: "5-Year Profit Roadmap ($M)",
+        chart_desc: "Reaching profitability in Year 2 and projecting $28M annual profit by Year 5.",
+        inv_tag: "Investment Opportunity",
+        inv_title: "Seed Fundraising & Investor Return Plan",
+        inv_subtitle: "Capitalizing on a $500B global market opportunity by empowering underserved SMBs across MENA and global regions.",
+        ask_pill: "Seed Round Ask",
+        ask_amount: "$3,000,000 USD",
+        ask_equity: "For 15% Equity Stake in CyberShield Inc.",
+        valuation_pre: "Pre-Money Valuation:",
+        valuation_post: "Post-Money Valuation:",
+        projected_exit: "Projected Exit Return:",
+        btn_request_deck: "Request Full Diligence Model",
+        use_funds_title: "Use of Funds Allocation",
+        fund_1: "Product R&D & AI Development",
+        fund_2: "Sales & Marketing Expansion",
+        fund_3: "International Expansion (MENA/SEA)",
+        fund_4: "Operations & Cloud Infrastructure",
+        fund_5: "Legal & Global Compliance",
+        timeline_heading: "5-Year Investor Return Roadmap",
+        y1_title: "$5.5M ARR Target",
+        y1_desc: "Scale to 800 customers. Launch in UAE & Saudi Arabia. Projected valuation $35M (75% gain).",
+        y1_val: "Stake Value: $5.25M",
+        y2_title: "$14M ARR Target",
+        y2_desc: "Scale to 2,000+ customers. Series A round at $60M valuation. Top-tier telecom partnerships.",
+        y2_val: "Stake Value: $9M (+200%)",
+        y3_title: "$32M ARR Target",
+        y3_desc: "Cross 5,000 customers. Series B round at $120M valuation. Partial liquidity option for Seed investors.",
+        y3_val: "Stake Value: $18M (+500%)",
+        y5_title: "$100M+ ARR / Exit Event",
+        y5_desc: "Strategic acquisition or IPO at $500M - $750M valuation (15x ARR exit multiple).",
+        y5_val: "Stake Value: $75M - $112.5M (25x-37x)",
+        ceo_quote: '"The question is not whether your company will be attacked. The question is: will you be ready when it happens? CyberShield ensures the answer is always yes."',
+        ceo_title: "Chief Executive Officer, CyberShield",
+        founding_team: "Co-Founded by: Fam, Charl, Bemen, Paula, Youssef Mostafa",
+        footer_desc: "Empowering global organizations with AI-native cybersecurity, continuous compliance, and cloud threat protection.",
+        footer_quick: "Quick Links",
+        footer_action: "Get In Touch",
+        footer_btn: "Book Investor Diligence Session",
+        footer_copy: "© 2026 CyberShield Inc. All rights reserved.",
+        form_name: "Full Name",
+        form_email: "Email Address",
+        form_interest: "Interest Area",
+        form_msg: "Message",
+        form_submit: "Submit Request"
+      },
+      ar: {
+        tagline_mini: "تأمين المستقبل",
+        nav_offers: "العروض والحلول",
+        nav_plans: "الباقات والأسعار",
+        nav_business: "نموذج الأعمال",
+        nav_investors: "عوائد المستثمرين",
+        nav_team: "القيادة",
+        btn_get_started: "ابدأ الآن",
+        hero_pill: "منصة أمن سيبراني من الجيل القادم",
+        hero_title_1: "سایبرشيلد:",
+        hero_title_2: "تأمين المستقبل",
+        hero_subtitle: "أمان بسيط وقوي لعالم متصل. نساعد الشركات والحكومات والأفراد على البقاء آمنين عبر الإنترنت بدقة الذكاء الاصطناعي.",
+        hero_cta_primary: "احمِ أنظمتك الآن",
+        hero_cta_secondary: "استكشف الباقات والعروض",
+        stat_arr: "الإيرادات السنوية المتكررة",
+        stat_customers: "عملاء يدفعون",
+        stat_industries: "عبر 12 قطاعًا مختلفًا",
+        stat_retention: "معدل الاحتفاظ بالعملاء",
+        stat_vs_industry: "مقابل 85% متوسط القطاع",
+        stat_protection: "حماية دائمًا على مدار الساعة",
+        stat_ai_response: "دفاع تلقائي مدعوم بالذكاء الاصطناعي",
+        prob_tag: "التحدي الملح",
+        prob_title: "تتزايد الجرائم الإلكترونية بسرعة وتكلف الشركات الملايين.",
+        prob_desc: "تتزايد الجرائم الإلكترونية من حيث الحجم والتعقيد والتكرار. لا توجد شركة صغيرة جداً أو راسخة جداً بحيث يتجاهلها مجرمو الإنترنت. الأمان القوي أصبح ضرورة تجارية وليس خياراً.",
+        prob_stat_1: "متوسط تكلفة اختراق البيانات",
+        prob_stat_2: "نمو سنوياً في الهجمات",
+        radar_title: "3 مخاطر رئيسية تواجه المؤسسات اليوم",
+        risk_1_title: "هجمات التصيد والبرمجيات الخبيثة بالذكاء الاصطناعي",
+        risk_1_desc: "تتجاوز الهجمات الحديثة الأدوات التقليدية مما يتطلب دفاعًا أصليًا بالذكاء الاصطناعي.",
+        risk_2_title: "توسع أسطح الهجوم بسبب العمل عن بُعد",
+        risk_2_desc: "تتطلب فرق العمل الموزعة أمنًا سحابيًا أولاً دون الحاجة لأجهزة معقدة.",
+        risk_3_title: "المتطلبات التنظيمية والامتثال الصارم",
+        risk_3_desc: "تؤدي فجوات الامتثال إلى عقوبات مالية صارمة وتعطيل للعمليات التجاري.",
+        offers_subtitle: "عروض CyberShield الرئيسية",
+        offers_title: "حماية سيبرانية شاملة في منصة واحدة",
+        offers_desc: "تجمع CyberShield بين اكتشاف التهديدات بالذكاء الاصطناعي، والامتثال الآلي، والمنصة السحابية، والتدريب التوعوي في محرك دفاعي موحد.",
+        offer_1_title: "اكتشاف التهديدات بالذكاء الاصطناعي",
+        offer_1_desc: "يرصد الأنشطة المشبوهة في الوقت الحقيقي باستخدام الذكاء الاصطناعي. يوقف التهديدات قبل أن تتحول إلى مشكلات أكبر.",
+        offer_1_f1: "تحليل مباشر بالذكاء الاصطناعي",
+        offer_1_f2: "عزل ثغرات اليوم الصفر",
+        offer_2_title: "منصة سحابية بالكامل",
+        offer_2_desc: "تعمل بالكامل في السحابة وتُنشر بسرعة. لا حاجة إلى أجهزة داخلية معقدة أو إعداد طويل.",
+        offer_2_f1: "تكامل سريع بنقرة واحدة",
+        offer_2_f2: "صفر تكاليف بنيوية محلية",
+        offer_3_title: "الامتثال والتدقيق الآلي",
+        offer_3_desc: "يجعل شركتك جاهزة للتدقيق بفضل دعم مدمج للمعايير الرئيسية. ينشئ التقارير ويحدد الفجوات تلقائياً.",
+        offer_3_f1: "تدقيق امتثال آلي تلقائي",
+        offer_3_f2: "تصدير تقارير PDF فورية",
+        offer_4_title: "التدريب والتوعية الأمنية",
+        offer_4_desc: "يعلم الموظفين كيفية اكتشاف التهديدات وتجنبها. يقلل الأخطاء البشرية ويقوي خط الدفاع الأول.",
+        offer_4_f1: "محاكاة تصيد احتيالي تفاعلية",
+        offer_4_f2: "تقييم مخاطر الموظفين",
+        plans_subtitle: "باقات أمنية مرنة",
+        plans_title: "حماية مصممة خصيصًا لكل حجم أعمال",
+        plans_desc: "ابدأ بحجم صغير، واثبت القيمة فوراً، ثم وسع نطاق الحماية مع نمو شركتك.",
+        save_badge: "وفّر 20%",
+        plan_basic_name: "الباقة الأساسية",
+        plan_basic_target: "العمل الحر والشركات الصغرى",
+        plan_basic_desc: "حماية أساسية ضد الت
